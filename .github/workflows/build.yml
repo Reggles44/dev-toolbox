@@ -52,7 +52,7 @@ jobs:
           git config user.name "Reggles44"
           git config user.email "reginaldbeakes@gmail.com"
 
-          git add dev-server
+          git add .
           git commit -m "Build and Update dev-server"
 
       - name: Push Changes
