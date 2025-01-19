@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"log"
@@ -16,12 +17,12 @@ func LogMiddleware(next http.Handler) http.Handler {
 			fmt.Printf("\t%s %s\n", key, strings.Join(value, " "))
 		}
 
-		body, err := io.ReadAll(r.Body)
-		if err != nil {
-			log.Printf("Error parsing body: %s", err)
-		}
-
+    body, err := io.ReadAll(r.Body)
+    if err != nil {
+      fmt.Printf("Error parsing body: %s", err)
+    }
 		fmt.Printf("\t%s\n", string(body))
+    r.Body = io.NopCloser(bytes.NewBuffer(body))
 
 		next.ServeHTTP(w, r)
 	})

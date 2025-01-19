@@ -10,7 +10,7 @@ import (
 
 
 var EchoHandler = http.HandlerFunc(func (w http.ResponseWriter, r *http.Request) {
-
+  
   body, err := io.ReadAll(r.Body)
   if err != nil {
     fmt.Printf("could not read body: %s\n", err)

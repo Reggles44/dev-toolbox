@@ -13,6 +13,7 @@ var SuccessResponse = &BaseResponse{
 
 var ErrorResponse = &BaseResponse{
 	Success: false,
-	Message: "Success",
+	Message: "Error",
+	Error: "Default Error Message",
 }
 
