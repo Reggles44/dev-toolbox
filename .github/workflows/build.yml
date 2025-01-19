@@ -1,0 +1,57 @@
+name: Go Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ["1.23.x"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+      # You can test your matrix by printing the current Go version
+      - name: Display Go version
+        run: go version
+
+      - name: Install dependencies
+        run: go get .
+
+      # - name: Test with the Go CLI
+      #   run: go test
+
+      - name: Checkout tools repo
+        uses: actions/checkout@v4
+        with:
+          repository: config-setup/local-bin
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: local-bin
+
+      - name: Go Build
+        run: |
+          go build -v ./local-bin/dev-server
+
+      - name: Build and push
+        run: |
+          cd local-bin
+
+          git config user.name "Reggles44"
+          git config user.email "reginaldbeakes@gmail.com"
+
+          git add dev-server
+          git commit -m "Build and Update dev-server"
+
+      - name: Push Changes
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd local-bin
+          git push https://x-access-token:$TOKEN@github.com/owner/target-repo.git
