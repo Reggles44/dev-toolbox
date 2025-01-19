@@ -33,6 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          ls -alt
           cd dev-server
           go get .
 
