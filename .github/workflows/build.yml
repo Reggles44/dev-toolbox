@@ -31,11 +31,11 @@ jobs:
       - name: Display Go version
         run: go version
 
-      - name: Install dependencies
-        run: |
-          ls -alt
-          cd dev-server
-          go get .
+      # - name: Install dependencies
+      #   run: |
+      #     ls -alt
+      #     cd dev-server
+      #     go get .
 
       # - name: Test with the Go CLI
       #   run: go test
