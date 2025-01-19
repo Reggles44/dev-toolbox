@@ -13,7 +13,16 @@ jobs:
         go-version: ["1.23.x"]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Checkout tools repo
+        uses: actions/checkout@v4
+        with:
+          repository: config-setup/local-bin
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: local-bin
+
       - name: Setup Go ${{ matrix.go-version }}
         uses: actions/setup-go@v5
         with:
@@ -23,20 +32,16 @@ jobs:
         run: go version
 
       - name: Install dependencies
-        run: go get .
+        run: |
+          cd dev-server
+          go get .
 
       # - name: Test with the Go CLI
       #   run: go test
 
-      - name: Checkout tools repo
-        uses: actions/checkout@v4
-        with:
-          repository: config-setup/local-bin
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: local-bin
-
       - name: Go Build
         run: |
+          cd dev-server
           go build -v ./local-bin/dev-server
 
       - name: Build and push
