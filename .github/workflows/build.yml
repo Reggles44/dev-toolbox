@@ -42,7 +42,6 @@ jobs:
 
       - name: Go Build
         run: |
-          cd dev-server
           go build -v ./local-bin/dev-server
 
       - name: Build and push
