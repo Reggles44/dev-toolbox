@@ -42,7 +42,7 @@ jobs:
 
       - name: Go Build
         run: |
-          go build -v ./cmd/dev.go -o local-bin/dev
+          go build -o local-bin/dev -v ./cmd/dev.go
 
       - name: Build and push
         run: |
