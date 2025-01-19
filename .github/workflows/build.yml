@@ -42,7 +42,8 @@ jobs:
 
       - name: Go Build
         run: |
-          go build -o local-bin/dev -v ./cmd/dev.go
+          ls -alt
+          go build -o ./local-bin/dev -v ./cmd/dev.go
 
       - name: Build and push
         run: |
