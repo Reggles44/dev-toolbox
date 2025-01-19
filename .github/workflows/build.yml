@@ -60,4 +60,4 @@ jobs:
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           cd local-bin
-          git push https://x-access-token:$TOKEN@github.com/owner/target-repo.git
+          git push https://x-access-token:$TOKEN@github.com/config-setup/dev-server.git
