@@ -53,6 +53,6 @@ jobs:
           git config user.email "reginaldbeakes@gmail.com"
 
           git add .
-          git commit -m "Build and Update dev-server"
+          git commit -m "Automatic build and push for dev"
           git push
 
