@@ -57,7 +57,7 @@ jobs:
 
       - name: Push Changes
         env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.TOKEN }}
         run: |
           cd local-bin
           git push https://x-access-token:$TOKEN@github.com/config-setup/dev-toolbox.git
