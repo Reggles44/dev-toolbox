@@ -54,10 +54,11 @@ jobs:
 
           git add .
           git commit -m "Build and Update dev-server"
+          git push
 
-      - name: Push Changes
-        env:
-          TOKEN: ${{ secrets.TOKEN }}
-        run: |
-          cd local-bin
-          git push https://x-access-token:$TOKEN@github.com/config-setup/dev-toolbox.git -vvv
+      # - name: Push Changes
+      #   env:
+      #     TOKEN: ${{ secrets.TOKEN }}
+      #   run: |
+      #     cd local-bin
+      #     git push https://x-access-token:$TOKEN@github.com/config-setup/dev-toolbox.git -vvv
