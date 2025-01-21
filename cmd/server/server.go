@@ -21,6 +21,7 @@ var (
 			http.Handle("/echo/", middleware.LogMiddleware(handlers.EchoHandler))
 			http.Handle("/success/", middleware.LogMiddleware(handlers.SuccessHandler))
 			http.Handle("/error/", middleware.LogMiddleware(handlers.ErrorHandler))
+			http.Handle("/redirect/", middleware.LogMiddleware(handlers.RedirectHandler))
 
 			log.Printf("Listening on :%d...", port)
 			err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
