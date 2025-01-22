@@ -22,6 +22,7 @@ var (
 			http.Handle("/success/", middleware.LogMiddleware(handlers.SuccessHandler))
 			http.Handle("/error/", middleware.LogMiddleware(handlers.ErrorHandler))
 			http.Handle("/redirect/", middleware.LogMiddleware(handlers.RedirectHandler))
+			http.Handle("/basic_auth/", middleware.LogMiddleware(handlers.BasicAuthHandler))
 
 			log.Printf("Listening on :%d...", port)
 			err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
