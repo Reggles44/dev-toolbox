@@ -10,8 +10,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
-
 var (
 	help      bool
 	port      uint16
@@ -19,8 +17,8 @@ var (
 		Use:   "server [-p 1234]",
 		Short: "Launch a local server",
 		Run: func(cmd *cobra.Command, args []string) {
-			http.Handle("/", middleware.LogMiddleware(handlers.RootHandler))
-			http.Handle("/echo/", middleware.LogMiddleware(handlers.EchoHandler))
+			http.Handle("GET /", middleware.LogMiddleware(handlers.RootGetHandler))
+			http.Handle("POST /echo/", middleware.LogMiddleware(handlers.EchoHandler))
 			http.Handle("/success/", middleware.LogMiddleware(handlers.SuccessHandler))
 			http.Handle("/error/", middleware.LogMiddleware(handlers.ErrorHandler))
 			http.Handle("/redirect/", middleware.LogMiddleware(handlers.RedirectHandler))

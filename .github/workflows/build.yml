@@ -40,13 +40,12 @@ jobs:
       # - name: Test with the Go CLI
       #   run: go test
 
-      - name: Go Build
+      - name: Test, Build, and push
         run: |
-          ls -alt
+          go test ./cmd/...
+
           go build -o ./local-bin/dev -v ./cmd/dev.go
 
-      - name: Build and push
-        run: |
           cd local-bin
 
           git config user.name "Reggles44"
@@ -55,4 +54,3 @@ jobs:
           git add .
           git commit -m "Automatic build and push for dev"
           git push
-

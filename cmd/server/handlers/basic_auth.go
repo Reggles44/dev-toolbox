@@ -12,18 +12,10 @@ var (
 )
 
 var BasicAuthHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	var response responses.BaseResponse
-
 	user, pass, ok := r.BasicAuth()
-	if !ok {
-		response = responses.BaseResponse{Success: false, Error: "Missing Basic Auth"}
-	} else if user != username {
-		response = responses.BaseResponse{Success: false, Error: "Username Incorrect"}
-	} else if pass != password {
-		response = responses.BaseResponse{Success: false, Error: "Password Incorrect"}
+	if !ok || user != username || pass != password {
+		w.WriteHeader(http.StatusUnauthorized)
 	} else {
-		response = responses.BaseResponse{Success: true, Message: "Successful Basic Auth"}
+		json.NewEncoder(w).Encode(responses.Response{Success: true, Message: "", Error: ""})
 	}
-
-	json.NewEncoder(w).Encode(response)
 })

@@ -1,19 +1,20 @@
 package responses
 
-type BaseResponse struct {
+import (
+	"encoding/json"
+)
+
+type Response struct {
 	Success bool   `json:"success"`
 	Message string `json:"message"`
 	Error   string `json:"error"`
 }
 
-var SuccessResponse = &BaseResponse{
-	Success: true,
-	Message: "Success",
-}
+func (r Response) toString() string {
+	v, err := json.Marshal(r)
+	if err != nil {
+		panic(err)
+	}
 
-var ErrorResponse = &BaseResponse{
-	Success: false,
-	Message: "Error",
-	Error: "Default Error Message",
+	return string(v)
 }
-
